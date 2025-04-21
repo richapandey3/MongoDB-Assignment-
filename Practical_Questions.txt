@@ -1,0 +1,98 @@
+1. Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017")  # Replace with Atlas URI if needed
+db = client["SuperstoreDB"]
+orders_collection = db["Orders"]
+
+==============================================
+
+2. Load Superstore CSV data into MongoDB
+with open("superstore.csv", mode="r", encoding="utf-8-sig") as file:
+    reader = csv.DictReader(file)
+    data = [dict(row) for row in reader]
+
+    # Convert numeric fields to float
+    for row in data:
+        row["Sales"] = float(row["Sales"])
+        row["Profit"] = float(row["Profit"])
+
+    orders_collection.insert_many(data)
+    print("Data inserted successfully!")
+
+==============================================
+
+
+3. Retrieve and print all documents
+print("\nAll documents:")
+for doc in orders_collection.find():
+    print(doc)
+
+==============================================
+
+4. Count total number of documents
+count = orders_collection.count_documents({})
+print(f"\nTotal documents: {count}")
+
+==============================================
+
+5. Fetch all orders from "West" region
+print("\nOrders from West region:")
+for doc in orders_collection.find({"Region": "West"}):
+    print(doc)
+
+==============================================
+
+6. Orders where Sales > 500
+print("\nOrders with Sales > 500:")
+for doc in orders_collection.find({"Sales": {"$gt": 500}}):
+    print(doc)
+
+==============================================
+
+7. Top 3 orders with highest profit
+print("\nTop 3 orders with highest Profit:")
+for doc in orders_collection.find().sort("Profit", -1).limit(3):
+    print(doc)
+
+==============================================
+
+8. Update Ship Mode from "First Class" to "Premium Class"
+update_result = orders_collection.update_many(
+    {"Ship Mode": "First Class"},
+    {"$set": {"Ship Mode": "Premium Class"}}
+)
+print(f"\nUpdated documents count: {update_result.modified_count}")
+
+==============================================
+
+
+9. Delete orders with Sales < 50
+delete_result = orders_collection.delete_many({"Sales": {"$lt": 50}})
+print(f"Deleted documents count: {delete_result.deleted_count}")
+
+==============================================
+
+10. Group by Region and calculate total Sales
+print("\nTotal sales per region:")
+pipeline = [
+    {"$group": {"_id": "$Region", "TotalSales": {"$sum": "$Sales"}}}
+]
+for result in orders_collection.aggregate(pipeline):
+    print(result)
+
+    ==============================================
+
+11. Fetch all distinct Ship Modes
+ship_modes = orders_collection.distinct("Ship Mode")
+print("\nDistinct Ship Modes:")
+print(ship_modes)
+
+
+==============================================
+
+12. Count number of orders per Category
+print("\nOrder count per Category:")
+pipeline = [
+    {"$group": {"_id": "$Category", "OrderCount": {"$sum": 1}}}
+]
+for result in orders_collection.aggregate(pipeline):
+    print(result)

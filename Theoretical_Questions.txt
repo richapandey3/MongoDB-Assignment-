@@ -1,0 +1,245 @@
+1. What are the key differences between SQL and NoSQL databases?
+SQL databases (like MySQL, PostgreSQL) use tables and follow a fixed schema (structure).
+
+NoSQL databases (like MongoDB) use collections and documents (like JSON) and are schema-less, meaning they’re more flexible.
+
+SQL is relational, NoSQL is non-relational.
+
+SQL is great for complex queries and structured data; NoSQL is better for large-scale, unstructured, or semi-structured data.
+
+==========================================================
+
+2. What makes MongoDB a good choice for modern applications?
+It stores data in a flexible document format (JSON-like), which is perfect for real-time, evolving data.
+
+It’s scalable, meaning it can handle more users or data easily.
+
+It supports high availability, replication, and sharding.
+
+Works well with JavaScript and Node.js, making it ideal for modern web apps.
+
+========================================================
+
+
+3. Explain the concept of collections in MongoDB.
+A collection in MongoDB is like a table in SQL. It contains multiple documents, which are like rows of data.
+But unlike SQL, each document can have a different structure (fields).
+
+==================================================================
+
+4. How does MongoDB ensure high availability using replication?
+MongoDB uses replica sets — a group of MongoDB servers.
+
+One is the primary node (main server), and the others are secondary nodes (backups).
+
+If the primary fails, one of the secondaries takes over automatically. This keeps your app running.
+
+==================================================================
+
+5. What are the main benefits of MongoDB Atlas?
+It’s a cloud-based version of MongoDB.
+
+Handles backup, scaling, monitoring, and security automatically.
+
+Easy to deploy, manage, and access from anywhere.
+
+You don’t need to install anything locally.
+
+==================================================================
+
+6. What is the role of indexes in MongoDB, and how do they improve performance?
+Indexes help speed up data retrieval. Without an index, MongoDB has to scan every document.
+With an index, it jumps directly to the matching documents — like using the index of a book to find a topic.
+
+==================================================================
+
+
+7. Describe the stages of the MongoDB aggregation pipeline.
+The aggregation pipeline processes data step-by-step (like an assembly line).
+Some common stages are:
+
+$match: filter documents
+
+$group: group data (like SQL’s GROUP BY)
+
+$sort: sort data
+
+$project: select specific fields
+
+$lookup: join data from another collection
+
+==================================================================
+
+
+8. What is sharding in MongoDB? How does it differ from replication?
+Sharding splits large datasets across multiple servers to improve performance.
+
+Replication copies the same data to multiple servers for high availability.
+
+Sharding = scale out data
+Replication = protect data
+
+==================================================================
+
+
+9. What is PyMongo, and why is it used?
+PyMongo is a Python library used to connect and interact with MongoDB from Python code.
+It helps you insert, update, and query MongoDB data using Python.
+
+==================================================================
+
+
+10. What are the ACID properties in the context of MongoDB transactions?
+ACID stands for:
+
+Atomicity – All operations in a transaction succeed or none do.
+
+Consistency – Data stays correct after the transaction.
+
+Isolation – Each transaction runs separately.
+
+Durability – Once committed, changes are permanent.
+
+MongoDB supports ACID transactions for multi-document operations.
+
+==================================================================
+
+
+
+11. What is the purpose of MongoDB's explain() function?
+The explain() function shows how MongoDB runs a query — helpful for performance tuning.
+It tells you if indexes are used or if a full collection scan is happening.
+
+==================================================================
+
+
+12. How does MongoDB handle schema validation?
+You can define rules for what a document should look like using JSON Schema.
+MongoDB checks these rules before inserting or updating documents, ensuring data quality.
+
+==================================================================
+
+
+13. What is the difference between a primary and a secondary node in a replica set?
+Primary Node: Handles all read/write operations.
+
+Secondary Nodes: Keep copies of data and update from the primary.
+If the primary fails, one secondary becomes the new primary.
+
+==================================================================
+
+
+14. What security mechanisms does MongoDB provide for data protection?
+Authentication – Ensures only authorized users access the database.
+
+Authorization – Controls what each user can do.
+
+Encryption – Data is encrypted both at rest and in transit.
+
+IP Whitelisting – Only trusted IPs can connect.
+
+
+==================================================================
+
+
+15. Explain the concept of embedded documents and when they should be used.
+An embedded document is a document inside another document.
+Use it when related data is often accessed together.
+
+
+Example:-
+
+{
+  name: "Rishabh",
+  address: {
+    city: "Varanasi",
+    pin: "221002"
+  }
+}
+
+==================================================================
+
+
+16. What is the purpose of MongoDB's $lookup stage in aggregation?
+$lookup is used to join data from another collection, similar to SQL JOINs.
+Useful when you need related data stored separately.
+
+
+
+==================================================================
+
+
+17. What are some common use cases for MongoDB?
+Social media platforms
+
+E-commerce sites
+
+Real-time analytics
+
+Content management systems (CMS)
+
+IoT applications
+
+==================================================================
+
+
+18. What are the advantages of using MongoDB for horizontal scaling?
+You can add more servers to handle more data and traffic.
+
+Sharding automatically spreads the load.
+
+Keeps performance high even with millions of users.
+
+==================================================================
+
+
+19. How do MongoDB transactions differ from SQL transactions?
+SQL always supports multi-operation transactions.
+
+MongoDB supports multi-document transactions since version 4.0, but only when needed.
+
+MongoDB is more optimized for high-speed operations without transactions, using document-level operations.
+
+==================================================================
+
+
+20. What are the main differences between capped collections and regular collections?
+Capped collections have a fixed size and automatically remove old documents (like a circular log).
+
+Regular collections grow without limits and don’t delete old data automatically.
+
+==================================================================
+
+
+21. What is the purpose of the $match stage in MongoDB's aggregation pipeline?
+$match filters documents — just like a WHERE clause in SQL.
+It selects only documents that meet a certain condition.
+
+==================================================================
+
+
+22. How can you secure access to a MongoDB database?
+Enable authentication and user roles.
+
+Use firewalls and IP whitelisting.
+
+Use SSL/TLS encryption.
+
+Keep MongoDB updated.
+
+Avoid exposing ports to the public.
+
+==================================================================
+
+
+23. What is MongoDB's WiredTiger storage engine, and why is it important?
+WiredTiger is the default storage engine in MongoDB.
+It offers:
+
+High performance
+
+Compression to save space
+
+Better concurrency (multiple operations at once)
+
+It makes MongoDB faster and more efficient.
